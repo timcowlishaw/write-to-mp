@@ -23,8 +23,22 @@
 		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 		<script type="text/javascript">google.load("jquery", "1.4.2");</script>
 		{% block head %}{% endblock %}
+     <meta property="og:title" content="Nominate Jeremy Corbyn for Labour leader" />
+     <meta property="og:type" content="website" />
+     <meta property="og:url" content="http://nominate-jeremy.appspot.com/mp/write" />
+     <meta property="og:image" content="http://www.jeremyforlabour.com/images/preview.png" />
+     <meta property="og:description" content="Ask your labour MP to nominate Jeremy here for Leader - it takes less than a minute." />
+
 	</head>
 	<body {% block body_attrs %}{% endblock %}>
+    <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=123593431075376";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
     <div id="tagline" class="display">
         <div id="tagline-nav" class="corbyn-nav">
             <div class="row bottom-header-row">
@@ -44,6 +58,7 @@
         <div id="tagline-inner">
           <div id="write-mp-inner">
             {% block body %}{% endblock %}
+            <div class="fb-share-button" data-href="http://nominate-jeremy.appspot.com/mp/write" data-layout="button_count"></div>
           </div>
         </div>
         <div id="jeremy-profile"></div>

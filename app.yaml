@@ -1,4 +1,4 @@
-application: write-to-mp
+application: nominate-jeremy
 version: 2
 runtime: python27
 threadsafe: true
