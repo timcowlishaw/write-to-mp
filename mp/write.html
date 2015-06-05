@@ -36,19 +36,12 @@
   </script>
 {% endblock %}
 {% block body %}
-  <div id="writetothem">
-      <form action="https://www.writetothem.com/write" method="POST" target="_blank">
-          <input type="hidden" name="mysociety_serialized_variables" value="{{ mysociety_serialized_variables }}">
-          <input type="hidden" name="name" value="{{ name }}">
-          <input type="hidden" name="writer_email" value="{{ email }}">
-          <input type="hidden" name="writer_email2" value="{{ email }}">
-
           <div id="mp-details">
             <img id="mp-photo" align="left" alt="" src="http://www.theyworkforyou.com{{ mp.image }}" height="{{ mp.image_height }}" width="{{ mp.image_width }}">
             <div class="mp-meta">
               <h2>Your MP</h2>
               {{ mp.full_name }}<br>
-              {{ representative_type }} for {{ mp.constituency }}<br>
+              {{ mp.party }} {{ representative_type }} for {{ mp.constituency }}<br>
               {% if mp.office %}
                 {% for office in mp.office %}
                   <b>{{ office.position }}{% if office.dept %}, {{ office.dept}}{% endif %}</b><br>
@@ -58,6 +51,14 @@
             </div>
             <div class="clear"></div>
           </div>
+ {% if "labour" in mp.party.lower() %}
+  <div id="writetothem">
+      <form action="https://www.writetothem.com/write" method="POST" target="_blank">
+          <input type="hidden" name="mysociety_serialized_variables" value="{{ mysociety_serialized_variables }}">
+          <input type="hidden" name="name" value="{{ name }}">
+          <input type="hidden" name="writer_email" value="{{ email }}">
+          <input type="hidden" name="writer_email2" value="{{ email }}">
+
           <div id="address">
               <div id="advice">
                   <div id="general-advice">
@@ -93,4 +94,9 @@ Yours sincerely,
       </form>
   </div>
   <div style="clear: both;"></div>
+  {% else %}
+    <div class="apology">
+      <p>Sorry, your local MP isn't a Labour party member, and therefore can't nominate a leadership candidate.</p>
+    </div>
+  {% endif %}
 {% endblock %}
