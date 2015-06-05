@@ -1,17 +1,52 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-		<title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"/>
+    <meta charset="utf-8" />
+    <link rel="icon" href="http://jeremycorbyn.org.uk/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="http://jeremycorbyn.org.uk/favicon.ico" type="image/x-icon">
+    <title>Support Jeremy Corbyn MP for Labour leader!</title>
 		{% block meta_tags %}{% endblock %}
-		<link rel="stylesheet" href="/styles/common.css?a" type="text/css" media="screen" />
+     <link href='http://fonts.googleapis.com/css?family=Montserrat:700,400' rel='stylesheet' type='text/css'>
+        <link href="http://jeremycorbyn.org.uk/bundles/outlandishacadoowp/css/foundation/foundation.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://jeremycorbyn.org.uk/bundles/outlandishacadoowp/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://jeremycorbyn.org.uk/bundles/outlandishacadoowp/css/main.css" rel="stylesheet" type="text/css" />
+        <link href="http://jeremycorbyn.org.uk/bundles/outlandishsite/css/main.css" rel="stylesheet" type="text/css" />
+        <link rel='stylesheet' id='dashicons-css'  href='http://scaca.beta.gd/wp-includes/css/dashicons.min.css?ver=3.9.1' type='text/css' media='all' />
+
+		  <link rel="stylesheet" href="/styles/common.css?a" type="text/css" media="screen" />
+            <script src="http://jeremycorbyn.org.uk/bundles/outlandishacadoowp/js/vendor/modernizr.js"></script>
+        <script src="http://jeremycorbyn.org.uk/bundles/outlandishacadoowp/js/vendor/jquery.js"></script>
+        <script src="http://jeremycorbyn.org.uk/bundles/outlandishsite/js/main.js"></script>
 		{% block additional_styles %}{% endblock %}
-		
+
 		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 		<script type="text/javascript">google.load("jquery", "1.4.2");</script>
 		{% block head %}{% endblock %}
 	</head>
 	<body {% block body_attrs %}{% endblock %}>
-		{% block body %}{% endblock %}
+    <div id="tagline" class="display">
+        <div id="tagline-nav" class="corbyn-nav">
+            <div class="row bottom-header-row">
+                <div class="bottom-header">
+                    <div class="large-24 columns large-centered text-right">
+                            <nav>
+        <a href="http://jeremyforlabour.com/">
+            <h1 class="fade-button white-button white-background-on-hover">JEREMY CORBYN FOR LABOUR</h1>
+        </a>
+
+    </nav>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tagline-inner">
+          <div id="write-mp-inner">
+            {% block body %}{% endblock %}
+          </div>
+        </div>
+        <div id="jeremy-profile"></div>
+    </div>
 	</body>
 </html>

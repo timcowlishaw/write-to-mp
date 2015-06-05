@@ -13,14 +13,14 @@
 {% block body %}
   <div id="instructions">
     <h2>Why email your {{ representative_type }}?</h2>
-    
+
     {% if intro_text %}
       {{ intro_text }}
     {% else %}
       <p class="red">Go to the <a href="/mp/admin/settings">settings page</a> and put in some introductory text.</p>
     {% endif %}
-  
-  <p>Get started by entering your details to the right.</p>
+
+  <p>Get started by entering your details below.</p>
   </div>
   <div id="mp-form">
     <form method="GET" action="/mp/write">

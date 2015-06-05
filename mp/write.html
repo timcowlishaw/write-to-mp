@@ -6,12 +6,10 @@
     $(function() {
       // Make links from the advice open in a separate window, so
       // the user does not risk losing their partly-written letter.
-      $("#specific-advice a").attr("target", "_blank");
-
       var form = $("#writetothem form");
       form.submit(function(e) {
         var div = $(".required").closest("div");
-        
+
         var ok = true;
         div.find("input").each(function() {
           var value = $.trim($(this).val());
@@ -35,79 +33,60 @@
         }
         return ok;
       });
-      
-      $("#advice li>ul").hide();
-      $("#advice h2").append('<span class="click-to-expand"><span>(click the notes to expand)</span></span>');
-      $("#specific-advice ol>li").css({"list-style": "none"}).each(function(i) {
-        $(this).children("p").prepend($('<span class="big-number"></span>').text("" + (i+1) ));
-        if ($(this).height() < 24) {
-          $(this).find(".big-number").addClass("oneline");
-        }
-      });
-      var expander_pars = $("#general-advice ul>li>p, #specific-advice ol>li>p");
-      expander_pars.addClass("active").addClass("closed").click(function() {
-        var already_open = $(this).hasClass("open");
-        expander_pars.removeClass("open").addClass("closed");
-        $("#advice li>ul").hide();
-        if (!already_open) {
-          $(this).addClass("open").removeClass("closed").parent().find("*").show();
-        }
-      });
-    });
   </script>
 {% endblock %}
 {% block body %}
-  <div id="advice">
-      <h2>Before you start</h2>
-      <div id="general-advice">
-        <ul>
-          <li>
-            <p>Use your own words, keep it brief, and only write to your own {{ representative_type }}.</p>
-            <ul>
-              <li>Please be polite, concise and to the point. A few paragraphs are much more likely to be read with interest than a few pages.</li>
-              <li><a target="_blank" href="https://www.writetothem.com/about-qa#formletters">Use your own words</a>: {{ representative_type }}s who get lots of identical messages about a particular issue don’t see these as a genuine reflection of their constituents’ views. Don’t worry, we’ll give you lots of pointers about what to cover in your email.</li>
-              <li><a target="_blank" href="https://www.writetothem.com/about-qa#onlyrep">It’s a waste of time</a> writing to {{ representative_type }}s other than your own; your message will go straight into the recycling bin.</li>
-              <li>You can find out more about <a target="_blank" href="http://www.theyworkforyou.com{{ mp.url }}">your {{ representative_type }} on TheyWorkForYou</a>.</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <div id="specific-advice"><div>
-        <h2>What to write</h2>
-        {{ advice }}
-      </div></div>
-      <div id="finally">
-        We use the <a href="https://www.writetothem.com/about-qa" target="_blank">WriteToThem</a> service to contact your {{ representative_type }}.
-        When you press the preview button, a new window will open on the WriteToThem site.
-        <a href="http://www.mysociety.org" target="_blank"><img align="right" src="https://www.writetothem.com/images/mysociety-dark-50.png" style="margin-right: 9px;"></a>
-      </div>
-  </div>
   <div id="writetothem">
       <form action="https://www.writetothem.com/write" method="POST" target="_blank">
           <input type="hidden" name="mysociety_serialized_variables" value="{{ mysociety_serialized_variables }}">
           <input type="hidden" name="name" value="{{ name }}">
           <input type="hidden" name="writer_email" value="{{ email }}">
           <input type="hidden" name="writer_email2" value="{{ email }}">
-          
+
           <div id="mp-details">
             <img id="mp-photo" align="left" alt="" src="http://www.theyworkforyou.com{{ mp.image }}" height="{{ mp.image_height }}" width="{{ mp.image_width }}">
-            {{ mp.full_name }}<br>
-            {{ representative_type }} for {{ mp.constituency }}<br>
-            {% if mp.office %}
-              {% for office in mp.office %}
-                <b>{{ office.position }}{% if office.dept %}, {{ office.dept}}{% endif %}</b><br>
-              {% endfor %}
-            {% endif %}
-            <span id="not-your-mp">(<a href="{{ not_your_mp_href }}">Not your {{ representative_type }}? Click here</a>)</span>
+            <div class="mp-meta">
+              <h2>Your MP</h2>
+              {{ mp.full_name }}<br>
+              {{ representative_type }} for {{ mp.constituency }}<br>
+              {% if mp.office %}
+                {% for office in mp.office %}
+                  <b>{{ office.position }}{% if office.dept %}, {{ office.dept}}{% endif %}</b><br>
+                {% endfor %}
+              {% endif %}
+              <span id="not-your-mp">(<a href="{{ not_your_mp_href }}">Not your {{ representative_type }}? Click here</a>)</span>
+            </div>
+            <div class="clear"></div>
           </div>
-          
           <div id="address">
-              <textarea name="body">Dear {{ mp.full_name }},&#xA;&#xA;&#xA;&#xA;Yours sincerely,&#xA;&#xA;{{ name }}</textarea>
-              <div><label for="wttf-address1">Address:<span class="required">*</span></label><input class="textfield" id="wttf-address1" type="text" name="writer_address1" value=""><span class="error-message">&#xAB;&nbsp;required</span></div>
-              <div><label for="wttf-address2">&nbsp;</label><input class="textfield" id="wttf-address2" type="text" name="writer_address2" value=""></div>
-              <div><label for="wttf-town">Town/city:<span class="required">*</span></label><input class="textfield" id="wttf-town" type="text" name="writer_town" value=""><span class="error-message">&#xAB;&nbsp;required</span></div>
-              <div><label for="wttf-county">County:</label><input class="textfield" id="wttf-county" type="text" name="state" value=""></div>
-              <div><label for="postcode">Postcode:</label><span id="postcode">{{ postcode }}</span></div>
+              <div id="advice">
+                  <div id="general-advice">
+                    <p>Use your own words, keep it brief, and only write to your own {{ representative_type }}.</p>
+                    <p>Please be polite, concise and to the point. A few paragraphs are much more likely to be read with interest than a few pages.</p>
+                  </div>
+                  <div id="finally">
+                    We use the <a href="https://www.writetothem.com/about-qa" target="_blank">WriteToThem</a> service to contact your {{ representative_type }}.
+                    When you press the preview button, a new window will open on the WriteToThem site.
+                  </div>
+              </div>
+              <textarea name="body">
+Dear {{ mp.full_name }},
+
+It's a difficult time for those of us in the labour movement. After 5 years of a coalition government which was catastrophic for working people and those who need the most help from society, Labour's defeat at the ballot box is doubly disappointing. In light of this, I believe we need to take the opportunity presented by the current leadership debate to conduct an open and honest debate about what our party stands for, and how we should best realise our shared goal of achieving a fairer, more just society.
+
+The majority of the current leadership contenders share a consensus view that Labour must occupy the centre ground if we are to win the hearts and minds of the British electorate. I'm not sure this is the case. Our defeat to the anti-austerity SNP in Scotland shows that for a large proportion of the population, it was Labour's failure to make a convincing case against Tory austerity that lost us their vote.
+
+In light of this, I belive it's especially important that a diverse range of candidates are presented to the party membership in the upcoming leadership ballot - in order to understand what went wrong, it's crucial that we listen to those we represent. As a result, I am urging you to nominate Jeremy Corbyn MP for the party leadership - Jeremy is a principled and able parlimentarian and campaigner who I believe would be an excellent choice for leader. In addition, his presence on the ballot as an anti-austerity candidate would give us as members a real choice in the future direction of the labour party, whatever the final outcome.
+
+Yours sincerely,
+
+{{ name }}
+              </textarea>
+              <div class="field"><label for="wttf-address1">Address:<span class="required"> (required)</span></label><input class="textfield" id="wttf-address1" type="text" name="writer_address1" value=""></div>
+              <div class="field"><label for="wttf-address2">&nbsp;</label><input class="textfield" id="wttf-address2" type="text" name="writer_address2" value=""></div>
+              <div class="field"><label for="wttf-town">Town/city:<span class="required"> (required)</span></label><input class="textfield" id="wttf-town" type="text" name="writer_town" value=""></div>
+              <div class="field"><label for="wttf-county">County:</label><input class="textfield" id="wttf-county" type="text" name="state" value=""></div>
+              <div class="field"><label class="inline-label" for="postcode">Postcode:</label><span id="postcode">{{ postcode }}</span></div>
           </div>
           <div id="phone"><label for="wttf-town">Phone:</label><input class="textfield" id="wttf-phone" type="text" name="writer_phone" value=""></div>
           <div class="submit">When you’re ready: <input class="submit" name="submitPreview" value="Preview your Message" type="submit"></div>
