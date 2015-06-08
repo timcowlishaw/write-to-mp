@@ -76,3 +76,18 @@ label.inline-label {
 input.submit {
   margin-left: 2em;
 }
+
+@media screen and (max-width: 782px) {
+  #tagline {
+    display: block !important;
+  }
+
+  #write-mp-inner {
+    width: 80%;
+    margin-right: 10%;
+  }
+
+  #jeremy-profile {
+    display: none;
+  }
+}
